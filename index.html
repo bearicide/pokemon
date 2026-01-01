@@ -1,898 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>matt's pokémon collection – for sale</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
-      --bg: #05060a;
-      --bg-alt: #0e1017;
-      --card: #151824;
-      --accent: #f9c846;
-      --accent-soft: rgba(249, 200, 70, 0.2);
-      --text: #f5f5f5;
-      --muted: #a5adc4;
-      --border: #272b3a;
-      --badges: #22263a;
-      --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.55);
-      --radius-lg: 18px;
-      --radius-sm: 10px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #222641 0, #05060a 55%);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    .page {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 24px 16px 48px;
-    }
-
-    header {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 28px;
-      padding: 20px 18px;
-      background: linear-gradient(145deg, #151824 0, #0b0d16 40%, #20253a 100%);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.9rem;
-      letter-spacing: 0.03em;
-      text-transform: lowercase;
-    }
-
-    header p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .tagline {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-top: 8px;
-    }
-
-    .pill {
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(245, 245, 245, 0.15);
-      background: rgba(0, 0, 0, 0.35);
-      font-size: 0.8rem;
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .pill strong {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    h2 {
-      margin: 32px 0 12px;
-      font-size: 1.3rem;
-      text-transform: lowercase;
-      letter-spacing: 0.07em;
-      color: var(--accent);
-    }
-
-    .section-subtitle {
-      margin: 0 0 18px;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    /* featured grid */
-
-    .featured-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .card {
-      background: radial-gradient(circle at top left, #222744 0, #111423 45%, #070812 100%);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      padding: 10px 10px 12px;
-      box-shadow: var(--shadow-soft);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: conic-gradient(
-        from 200deg,
-        rgba(249, 200, 70, 0.05),
-        transparent,
-        rgba(120, 210, 255, 0.08),
-        transparent
-      );
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card img {
-      width: 100%;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      display: block;
-      background: #000;
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      align-items: baseline;
-    }
-
-    .card-title {
-      font-size: 0.98rem;
-      font-weight: 600;
-    }
-
-    .card-badge {
-      font-size: 0.7rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: var(--badges);
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-    }
-
-    .card-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .price-tag {
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .note {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    /* tables */
-
-    .table-wrap {
-      overflow-x: auto;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      background: var(--bg-alt);
-      box-shadow: var(--shadow-soft);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.86rem;
-    }
-
-    thead {
-      background: rgba(12, 15, 30, 0.95);
-    }
-
-    th, td {
-      padding: 8px 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    th {
-      text-align: left;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      font-size: 0.75rem;
-    }
-
-    tbody tr:nth-child(even) {
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    tbody tr:hover {
-      background: rgba(249, 200, 70, 0.06);
-    }
-
-    .grade-pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 7px;
-      border-radius: 999px;
-      background: rgba(120, 210, 255, 0.1);
-      border: 1px solid rgba(120, 210, 255, 0.3);
-      font-size: 0.72rem;
-    }
-
-    .est-low,
-    .est-high {
-      white-space: nowrap;
-    }
-
-    .est-low {
-      color: var(--accent);
-    }
-
-    .est-high {
-      color: var(--muted);
-    }
-
-    .footnote {
-      margin-top: 10px;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    footer {
-      margin-top: 40px;
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-align: center;
-      opacity: 0.8;
-    }
-
-    footer strong {
-      color: var(--accent);
-    }
-
-    @media (max-width: 720px) {
-      header {
-        padding: 16px 14px;
-      }
-      .page {
-        padding-inline: 12px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matt's Pokémon Sale Binder</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="page">
-    <header>
-      <h1>matt's pokémon sale binder</h1>
-      <p>
-        Selected raw cards & graded slabs from my personal collection.
-        Everything pictured here is available. Pricing is based on realistic recent sales
-        (not meme list prices).
-      </p>
-      <div class="tagline">
-        <div class="pill">
-          target box price:
-          <strong>$850</strong>
-        </div>
-        <div class="pill">
-          est. value range:
-          <strong>$780 – $950</strong>
-        </div>
-        <div class="pill">
-          condition:
-          <span>raw near-mint & graded slabs</span>
-        </div>
-      </div>
-    </header>
 
-    <!-- ✳ EDITABLE: replace image filenames with your actual images in /images/ -->
-    <section id="featured">
-      <h2>featured hits</h2>
-      <p class="section-subtitle">
-        The heavy hitters that carry most of the value. Perfect for people who just want the
-        dragons, eeveelutions, and shiny fire lizards.
-      </p>
+<header>
+<h1>Matt's Pokémon Sale Binder</h1>
+<p>Everything pictured here is available. Message if you want bundle pricing.</p>
+</header>
 
-      <div class="featured-grid">
-        <article class="card">
-          <img src="images/umbreon-vmax-alt.jpg" alt="Umbreon VMAX alt art" />
-          <div class="card-header">
-            <div class="card-title">Umbreon VMAX (alt art)</div>
-            <div class="card-badge">raw nm</div>
-          </div>
-          <div class="card-meta">
-            <span class="note">Trainer Gallery / alt artwork</span>
-            <span class="price-tag">$40 – $65</span>
-          </div>
-        </article>
+<section id="overview">
+<p>Target box price: $850</p>
+<p>Estimated market value range: $780 – $950</p>
+<p>Condition: Mostly Near-Mint raw hits + graded slabs</p>
+</section>
 
-        <article class="card">
-          <img src="images/rayquaza-vmax-alt.jpg" alt="Rayquaza VMAX alt art" />
-          <div class="card-header">
-            <div class="card-title">Rayquaza VMAX (alt art)</div>
-            <div class="card-badge">raw nm</div>
-          </div>
-          <div class="card-meta">
-            <span class="note">Rapid Strike, chase card</span>
-            <span class="price-tag">$30 – $55</span>
-          </div>
-        </article>
+<hr>
 
-        <article class="card">
-          <img src="images/blaziken-vmax-alt.jpg" alt="Blaziken VMAX alt art" />
-          <div class="card-header">
-            <div class="card-title">Blaziken VMAX (alt art)</div>
-            <div class="card-badge">raw nm</div>
-          </div>
-          <div class="card-meta">
-            <span class="note">High-demand alt from Chilling Reign</span>
-            <span class="price-tag">$20 – $35</span>
-          </div>
-        </article>
+<section id="featured">
+<h2>Featured Hits</h2>
 
-        <article class="card">
-          <img src="images/sylveon-vmax-alt.jpg" alt="Sylveon VMAX alt art" />
-          <div class="card-header">
-            <div class="card-title">Sylveon VMAX (alt art)</div>
-            <div class="card-badge">raw nm</div>
-          </div>
-          <div class="card-meta">
-            <span class="note">Eeveelution fan-favorite</span>
-            <span class="price-tag">$18 – $30</span>
-          </div>
-        </article>
+<div class="card">
+  <img src="images/umbreon_vmax.jpg" alt="Umbreon VMAX alt art">
+  <p><strong>Umbreon VMAX (Alt Art)</strong></p>
+  <p>Raw NM</p>
+  <p>$40 – $65</p>
+</div>
 
-        <article class="card">
-          <img src="images/ice-rider-calyrex-vmax-alt.jpg" alt="Ice Rider Calyrex VMAX alt art" />
-          <div class="card-header">
-            <div class="card-title">Ice Rider Calyrex VMAX (alt art)</div>
-            <div class="card-badge">raw nm</div>
-          </div>
-          <div class="card-meta">
-            <span class="note">Chilling Reign alt</span>
-            <span class="price-tag">$10 – $18</span>
-          </div>
-        </article>
+<div class="card">
+  <img src="images/gold_metal_charizard_sgc9.jpg" alt="Gold Metal Charizard SGC 9">
+  <p><strong>Gold Metal Charizard</strong></p>
+  <p>SGC 9</p>
+  <p>Celebrations UPC gold metal promo</p>
+  <!-- Price removed -->
+</div>
 
-        <article class="card">
-          <img src="images/gold-metal-charizard-sgc9.jpg" alt="Gold Metal Charizard SGC 9" />
-          <div class="card-header">
-            <div class="card-title">Gold Metal Charizard</div>
-            <div class="card-badge">sgc 9</div>
-          </div>
-          <div class="card-meta">
-            <span class="note">Celebrations UPC gold metal promo</span>
-            <span class="price-tag">$135 – $160</span>
-          </div>
-        </article>
+<div class="card">
+  <img src="images/m_charizard_ex_psa8.jpg" alt="Mega Charizard EX PSA 8">
+  <p><strong>M Charizard EX (PSA 8)</strong></p>
+  <p>XY Evolutions Full Art</p>
+  <p>$70 – $85</p>
+</div>
+</section>
 
-        <article class="card">
-          <img src="images/m-charizard-ex-psa8.jpg" alt="Mega Charizard EX PSA 8" />
-          <div class="card-header">
-            <div class="card-title">M Charizard EX</div>
-            <div class="card-badge">psa 8</div>
-          </div>
-          <div class="card-meta">
-            <span class="note">Evolutions full art</span>
-            <span class="price-tag">$70 – $85</span>
-          </div>
-        </article>
+<hr>
 
-        <article class="card">
-          <img src="images/illustration-grand-prix-charizard.jpg" alt="Illustration Grand Prix Charizard" />
-          <div class="card-header">
-            <div class="card-title">Charizard (Illustration Grand Prix)</div>
-            <div class="card-badge">psa / cgc</div>
-          </div>
-          <div class="card-meta">
-            <span class="note">Japanese stadium art promo (PSA 8 & CGC 9)</span>
-            <span class="price-tag">~$60 – $80 ea.</span>
-          </div>
-        </article>
-      </div>
+<section id="slabs">
+<h3>Graded Slabs</h3>
+<table>
+<thead>
+<tr>
+<th>Card</th>
+<th>Details</th>
+<th>Price</th>
+</tr>
+</thead>
 
-      <p class="footnote">
-        <!-- ✳ EDITABLE: tweak wording or price range here -->
-        Featured prices are realistic recent sale ranges. Open to offers on multiple-card bundles.
-      </p>
-    </section>
+<tbody>
+<tr>
+<td>Gold Metal Charizard – SGC 9</td>
+<td>2021 Celebrations UPC (Metal Promo)</td>
+<td><!-- price removed --></td>
+</tr>
 
-    <section id="graded">
-      <h2>graded slabs</h2>
-      <p class="section-subtitle">
-        All graded cards are authentic and slabbed by PSA, SGC, or CGC. Ideal if you want
-        display pieces without grading them yourself.
-      </p>
+<tr>
+<td>M Charizard EX – PSA 8</td>
+<td>Evolutions Full Art Crimson Dive</td>
+<td>$70 – $85</td>
+</tr>
 
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>card</th>
-              <th>grader / grade</th>
-              <th>notes</th>
-              <th>est. low</th>
-              <th>est. high</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- ✳ EDITABLE: add / remove rows or tweak prices -->
+<tr>
+<td>Charizard GX – PSA 7</td>
+<td>Hidden Fates tin promo</td>
+<td>$20 – $35</td>
+</tr>
 
-            <tr>
-              <td>Gold Metal Charizard (Celebrations UPC)</td>
-              <td><span class="grade-pill">SGC 9</span></td>
-              <td>Gold metal reprint, 2021 Celebrations Ultra Premium</td>
-              <td class="est-low">$135</td>
-              <td class="est-high">$160</td>
-            </tr>
+<tr>
+<td>Blastoise VMAX – CGC 9</td>
+<td>Battle Styles</td>
+<td>$25 – $35</td>
+</tr>
 
-            <tr>
-              <td>M Charizard EX – Evolutions #13</td>
-              <td><span class="grade-pill">PSA 8</span></td>
-              <td>Full art Crimson Dive from XY Evolutions</td>
-              <td class="est-low">$70</td>
-              <td class="est-high">$85</td>
-            </tr>
+</tbody>
+</table>
+</section>
 
-            <tr>
-              <td>Charizard – Illustration Grand Prix (JP)</td>
-              <td><span class="grade-pill">PSA 8</span></td>
-              <td>2020 PROMO S-P #143, stadium artwork</td>
-              <td class="est-low">$120</td>
-              <td class="est-high">$150</td>
-            </tr>
+<hr>
 
-            <tr>
-              <td>Charizard – Illustration Grand Prix (JP)</td>
-              <td><span class="grade-pill">CGC 9</span></td>
-              <td>Same art, CGC slab</td>
-              <td class="est-low">$60</td>
-              <td class="est-high">$80</td>
-            </tr>
+<section id="raw-cards">
+<h3>Raw Cards</h3>
+<table>
+<thead>
+<tr>
+<th>Card</th>
+<th>Price Range</th>
+</tr>
+</thead>
 
-            <tr>
-              <td>M Charizard EX (JP, Crimson Dive 300)</td>
-              <td><span class="grade-pill">CGC 8.5</span></td>
-              <td>Gold full art Japanese Mega</td>
-              <td class="est-low">$55</td>
-              <td class="est-high">$70</td>
-            </tr>
+<tbody>
+<tr>
+<td>Umbreon VMAX (Alt Artwork)</td>
+<td>$40 – $65</td>
+</tr>
+<tr>
+<td>Rayquaza VMAX</td>
+<td>$12 – $18</td>
+</tr>
+<tr>
+<td>Charizard V (Celebrations)</td>
+<td>$8 – $12</td>
+</tr>
+<tr>
+<td>Pikachu VMAX (Chunkachu)</td>
+<td>$6 – $10</td>
+</tr>
+<tr>
+<td>Mew VMAX Fusion Strike</td>
+<td>$8 – $14</td>
+</tr>
+<tr>
+<td>Gengar VMAX</td>
+<td>$20 – $35</td>
+</tr>
+<!-- Add any others you still want listed -->
+</tbody>
+</table>
+</section>
 
-            <tr>
-              <td>M Blastoise EX</td>
-              <td><span class="grade-pill">CGC 8.5</span></td>
-              <td>Full art Mega from XY era</td>
-              <td class="est-low">$35</td>
-              <td class="est-high">$45</td>
-            </tr>
+<hr>
 
-            <tr>
-              <td>M Venusaur EX (gold crisis vine)</td>
-              <td><span class="grade-pill">CGC 8.5</span></td>
-              <td>Full art Mega Venusaur</td>
-              <td class="est-low">$35</td>
-              <td class="est-high">$45</td>
-            </tr>
+<section id="contact">
+<p>Serious offers only. Willing to bundle. Local pickup in Flushing, MI or shipping available.</p>
+<p>Contact: <a href="mailto:matt.baier86@gmail.com">matt.baier86@gmail.com</a></p>
+</section>
 
-            <tr>
-              <td>Blastoise EX</td>
-              <td><span class="grade-pill">CGC 8.5</span></td>
-              <td>XY-era EX</td>
-              <td class="est-low">$20</td>
-              <td class="est-high">$30</td>
-            </tr>
-
-            <tr>
-              <td>Base Set Blastoise</td>
-              <td><span class="grade-pill">PSA 6</span></td>
-              <td>Unlimited holo, classic art</td>
-              <td class="est-low">$22</td>
-              <td class="est-high">$28</td>
-            </tr>
-
-            <tr>
-              <td>Magneton – Neo Revelation</td>
-              <td><span class="grade-pill">PSA 6</span></td>
-              <td>Holo vintage</td>
-              <td class="est-low">$30</td>
-              <td class="est-high">$40</td>
-            </tr>
-
-            <tr>
-              <td>Lugia (reverse / EX-era)</td>
-              <td><span class="grade-pill">CGC 9</span></td>
-              <td>Holo Lugia in CGC slab</td>
-              <td class="est-low">$25</td>
-              <td class="est-high">$30</td>
-            </tr>
-
-            <tr>
-              <td>Galarian Zapdos</td>
-              <td><span class="grade-pill">CGC 8.5</span></td>
-              <td>Modern alt-style bird</td>
-              <td class="est-low">$20</td>
-              <td class="est-high">$28</td>
-            </tr>
-
-            <tr>
-              <td>Squirtle – Base Set</td>
-              <td><span class="grade-pill">PSA 6–7</span></td>
-              <td>Original Kanto starter</td>
-              <td class="est-low">$16</td>
-              <td class="est-high">$20</td>
-            </tr>
-
-            <tr>
-              <td>Wartortle – Base Set</td>
-              <td><span class="grade-pill">PSA 6</span></td>
-              <td>Base Set stage 1</td>
-              <td class="est-low">$18</td>
-              <td class="est-high">$22</td>
-            </tr>
-
-            <tr>
-              <td>Squirtle – TV Animation (Topps-style)</td>
-              <td><span class="grade-pill">PSA 9</span></td>
-              <td>TV promo slab</td>
-              <td class="est-low">$22</td>
-              <td class="est-high">$30</td>
-            </tr>
-
-            <tr>
-              <td>Suicune (JP) – full art</td>
-              <td><span class="grade-pill">CGC 9.5</span></td>
-              <td>High-grade legendary dog</td>
-              <td class="est-low">$35</td>
-              <td class="est-high">$50</td>
-            </tr>
-
-            <tr>
-              <td>Suicune – Aqua Recover</td>
-              <td><span class="grade-pill">CGC 8.5</span></td>
-              <td>English reverse</td>
-              <td class="est-low">$12</td>
-              <td class="est-high">$18</td>
-            </tr>
-
-            <tr>
-              <td>Crobat V (shiny)</td>
-              <td><span class="grade-pill">CGC 9</span></td>
-              <td>Japanese shiny full art</td>
-              <td class="est-low">$30</td>
-              <td class="est-high">$40</td>
-            </tr>
-
-            <tr>
-              <td>Arcanine (full art)</td>
-              <td><span class="grade-pill">CGC 8.5</span></td>
-              <td>Modern EX/V-style</td>
-              <td class="est-low">$15</td>
-              <td class="est-high">$22</td>
-            </tr>
-
-            <tr>
-              <td>Professor (full art trainer)</td>
-              <td><span class="grade-pill">CGC 9</span></td>
-              <td>Modern FA supporter</td>
-              <td class="est-low">$10</td>
-              <td class="est-high">$15</td>
-            </tr>
-
-            <tr>
-              <td>Houndoom V</td>
-              <td><span class="grade-pill">CGC 8.5</span></td>
-              <td>Modern V holo</td>
-              <td class="est-low">$10</td>
-              <td class="est-high">$15</td>
-            </tr>
-
-            <tr>
-              <td>Diancie (pink full art)</td>
-              <td><span class="grade-pill">CGC 9</span></td>
-              <td>Fairy-type sparkle card</td>
-              <td class="est-low">$18</td>
-              <td class="est-high">$25</td>
-            </tr>
-
-            <tr>
-              <td>Forretress (reverse)</td>
-              <td><span class="grade-pill">CGC 8</span></td>
-              <td>2011-era reverse holo</td>
-              <td class="est-low">$6</td>
-              <td class="est-high">$10</td>
-            </tr>
-
-            <tr>
-              <td>McDonald's Pikachu / Bulbasaur / Rowlet / Squirtle – CGC 7–9</td>
-              <td><span class="grade-pill">CGC 7–9</span></td>
-              <td>2021 McDonald's promo set, various grades</td>
-              <td class="est-low">$8 ea.</td>
-              <td class="est-high">$20 ea.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p class="footnote">
-        For multiple slab purchases or the entire graded lot, I'm open to a bundled price.
-      </p>
-    </section>
-
-    <section id="raw-cards">
-      <h2>raw cards</h2>
-      <p class="section-subtitle">
-        Unsleeved in the photos, but stored in sleeves/toploaders in real life.
-        All prices assume near-mint unless noted.
-      </p>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>card</th>
-              <th>details</th>
-              <th>est. low</th>
-              <th>est. high</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- ✳ EDITABLE: adjust prices or text as needed -->
-
-            <tr>
-              <td>Umbreon VMAX (alt art)</td>
-              <td>Trainer Gallery / alt artwork</td>
-              <td class="est-low">$40</td>
-              <td class="est-high">$65</td>
-            </tr>
-            <tr>
-              <td>Rayquaza VMAX (alt art)</td>
-              <td>Rapid Strike alt from Evolving Skies</td>
-              <td class="est-low">$30</td>
-              <td class="est-high">$55</td>
-            </tr>
-            <tr>
-              <td>Blaziken VMAX (alt art)</td>
-              <td>Chilling Reign alternate art</td>
-              <td class="est-low">$20</td>
-              <td class="est-high">$35</td>
-            </tr>
-            <tr>
-              <td>Sylveon VMAX (alt art)</td>
-              <td>Eevee fan-favorite, Evolving Skies</td>
-              <td class="est-low">$18</td>
-              <td class="est-high">$30</td>
-            </tr>
-            <tr>
-              <td>Ice Rider Calyrex VMAX (alt art)</td>
-              <td>Chilling Reign alt</td>
-              <td class="est-low">$10</td>
-              <td class="est-high">$18</td>
-            </tr>
-
-            <tr>
-              <td>Rayquaza EX – Dragon Strike</td>
-              <td>XY Roaring Skies</td>
-              <td class="est-low">$10</td>
-              <td class="est-high">$18</td>
-            </tr>
-            <tr>
-              <td>Rayquaza EX – Celestial Roar</td>
-              <td>XY Roaring Skies</td>
-              <td class="est-low">$10</td>
-              <td class="est-high">$20</td>
-            </tr>
-            <tr>
-              <td>Rayquaza EX – other art</td>
-              <td>Additional Rayquaza EX variant</td>
-              <td class="est-low">$8</td>
-              <td class="est-high">$15</td>
-            </tr>
-
-            <tr>
-              <td>M Gardevoir EX (dual-type)</td>
-              <td>Steam Siege, Brilliant Arrow</td>
-              <td class="est-low">$6</td>
-              <td class="est-high">$12</td>
-            </tr>
-            <tr>
-              <td>M Gardevoir EX – alt art</td>
-              <td>Colorful EX full art</td>
-              <td class="est-low">$8</td>
-              <td class="est-high">$15</td>
-            </tr>
-            <tr>
-              <td>M Gardevoir EX – third variant</td>
-              <td>Neon-style full art</td>
-              <td class="est-low">$7</td>
-              <td class="est-high">$14</td>
-            </tr>
-
-            <tr>
-              <td>Yveltal EX</td>
-              <td>XY-era legendary bird</td>
-              <td class="est-low">$8</td>
-              <td class="est-high">$14</td>
-            </tr>
-            <tr>
-              <td>M Mewtwo EX</td>
-              <td>Vanishing Strike / XY</td>
-              <td class="est-low">$5</td>
-              <td class="est-high">$12</td>
-            </tr>
-
-            <tr>
-              <td>Venusaur EX ×4</td>
-              <td>XY / Evolutions full art copies</td>
-              <td class="est-low">$5 ea.</td>
-              <td class="est-high">$10 ea.</td>
-            </tr>
-            <tr>
-              <td>M Venusaur EX (raw)</td>
-              <td>Additional Mega Venusaur EX</td>
-              <td class="est-low">$8</td>
-              <td class="est-high">$14</td>
-            </tr>
-
-            <tr>
-              <td>Venusaur &amp; Snivy GX (JP)</td>
-              <td>Tag Team Japanese</td>
-              <td class="est-low">$5</td>
-              <td class="est-high">$10</td>
-            </tr>
-
-            <tr>
-              <td>Blastoise &amp; Piplup GX ×2</td>
-              <td>Tag Team GX, both copies NM</td>
-              <td class="est-low">$6 ea.</td>
-              <td class="est-high">$10 ea.</td>
-            </tr>
-
-            <tr>
-              <td>Reshiram &amp; Charizard GX</td>
-              <td>Tag Team GX, Outrage / Flare Strike</td>
-              <td class="est-low">$8</td>
-              <td class="est-high">$14</td>
-            </tr>
-
-            <tr>
-              <td>Dragonite EX (gold)</td>
-              <td>Full art EX Dragonite</td>
-              <td class="est-low">$8</td>
-              <td class="est-high">$15</td>
-            </tr>
-
-            <tr>
-              <td>Reshiram full art</td>
-              <td>Silver-style full art Reshiram</td>
-              <td class="est-low">$5</td>
-              <td class="est-high">$10</td>
-            </tr>
-
-            <tr>
-              <td>Tyranitar V / VMAX</td>
-              <td>Modern Tyranitar hit</td>
-              <td class="est-low">$6</td>
-              <td class="est-high">$10</td>
-            </tr>
-
-            <tr>
-              <td>Gyarados EX</td>
-              <td>EX with Stormy Seas</td>
-              <td class="est-low">$8</td>
-              <td class="est-high">$12</td>
-            </tr>
-
-            <tr>
-              <td>Xerneas GX</td>
-              <td>Modern fairy-type GX</td>
-              <td class="est-low">$4</td>
-              <td class="est-high">$7</td>
-            </tr>
-
-            <tr>
-              <td>Blastoise VMAX</td>
-              <td>Gigantamax turtle</td>
-              <td class="est-low">$4</td>
-              <td class="est-high">$7</td>
-            </tr>
-
-            <tr>
-              <td>Houndoom (gold secret)</td>
-              <td>Single Strike gold</td>
-              <td class="est-low">$15</td>
-              <td class="est-high">$25</td>
-            </tr>
-
-            <tr>
-              <td>Eevee – Energy Evolution</td>
-              <td>Sun &amp; Moon promo-style</td>
-              <td class="est-low">$3</td>
-              <td class="est-high">$6</td>
-            </tr>
-
-            <tr>
-              <td>Venusaur (Pokémon GO) ×2</td>
-              <td>Loopy Lasso / Solar Beam</td>
-              <td class="est-low">$1.5 ea.</td>
-              <td class="est-high">$3 ea.</td>
-            </tr>
-
-            <tr>
-              <td>Bulbasaur (various)</td>
-              <td>Base reprints &amp; modern</td>
-              <td class="est-low">$0.75</td>
-              <td class="est-high">$2</td>
-            </tr>
-
-            <tr>
-              <td>Ivysaur (various)</td>
-              <td>Base reprints</td>
-              <td class="est-low">$1.5</td>
-              <td class="est-high">$2</td>
-            </tr>
-
-            <tr>
-              <td>Marnie (full art trainer)</td>
-              <td>Sword &amp; Shield FA</td>
-              <td class="est-low">$15</td>
-              <td class="est-high">$20</td>
-            </tr>
-
-            <tr>
-              <td>Arcanine (modern ultra)</td>
-              <td>Raw, near-mint</td>
-              <td class="est-low">$2</td>
-              <td class="est-high">$4</td>
-            </tr>
-
-            <tr>
-              <td>Diancie (holo)</td>
-              <td>Raw, near-mint</td>
-              <td class="est-low">$2</td>
-              <td class="est-high">$4</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p class="footnote">
-        Open to selling individual cards, small bundles (e.g. all Charizards, all Rayquazas),
-        or the entire raw lot as one purchase.
-      </p>
-    </section>
-
-    <footer>
-      <p>
-        serious offers only. if you're looking to grab the whole box,
-        <strong>around $850</strong> takes everything listed on this page.
-      </p>
-    </footer>
-  </div>
 </body>
 </html>
