@@ -2,389 +2,182 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Pokémon Sale Binder – bearicide</title>
+  <title>Gold Metal Charizard for Sale – bearicide</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
-    :root {
-      --bg-dark: #05060a;
-      --bg-card: #10131b;
-      --bg-card-soft: #181c28;
-      --accent: #ffcc00;
-      --accent-soft: #ffe680;
-      --accent-2: #6dd6ff;
-      --accent-3: #ff6da8;
-      --border-subtle: #2b3243;
-      --text-main: #f7f7fb;
-      --text-muted: #b0b5c6;
-      --chip-bg: #1c2232;
-      --chip-border: #30384a;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
-      --radius-lg: 18px;
-      --radius-pill: 999px;
+    :root{
+      --bg-dark:#05060a;
+      --bg-card:#0f1320;
+      --accent:#ffcc00;
+      --accent-soft:#ffe680;
+      --accent-2:#6dd6ff;
+      --accent-3:#ff6da8;
+      --border-subtle:#2b3243;
+      --text-main:#f7f7fb;
+      --text-muted:#b0b5c6;
+      --shadow-soft:0 18px 40px rgba(0,0,0,.55);
+      --radius-lg:18px;
+      --radius-pill:999px;
     }
 
-    * {
-      box-sizing: border-box;
+    *{box-sizing:border-box}
+    html,body{
+      margin:0; padding:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      background:radial-gradient(circle at top, #15192b 0, #05060a 55%, #000 100%);
+      color:var(--text-main);
+      line-height:1.5;
     }
 
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, sans-serif;
-      background: radial-gradient(circle at top, #15192b 0, #05060a 55%, #000 100%);
-      color: var(--text-main);
-      line-height: 1.5;
-    }
+    body{padding:1.5rem; display:flex; justify-content:center;}
+    .page{width:100%; max-width:960px; margin:0 auto;}
 
-    body {
-      padding: 1.5rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    .page {
-      width: 100%;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    header {
-      border-radius: 24px;
-      padding: 1.75rem 1.75rem 1.5rem;
+    header{
+      border-radius:24px;
+      padding:1.5rem;
       background:
-        linear-gradient(135deg, rgba(255, 204, 0, 0.16), transparent 40%),
-        linear-gradient(315deg, rgba(109, 214, 255, 0.18), transparent 42%),
-        linear-gradient(45deg, rgba(255, 109, 168, 0.18), transparent 36%),
-        rgba(6, 8, 18, 0.94);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
+        linear-gradient(135deg, rgba(255,204,0,.18), transparent 42%),
+        linear-gradient(315deg, rgba(109,214,255,.18), transparent 42%),
+        linear-gradient(45deg, rgba(255,109,168,.18), transparent 36%),
+        rgba(6,8,18,.94);
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow:var(--shadow-soft);
+      position:relative;
+      overflow:hidden;
+    }
+    header::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at -10% 0, rgba(255,255,255,.12), transparent 55%);
+      mix-blend-mode:screen;
+      opacity:.6;
+      pointer-events:none;
+    }
+    .header-inner{position:relative; z-index:1; display:flex; flex-direction:column; gap:.9rem;}
+
+    h1{
+      margin:0;
+      font-size:clamp(1.7rem, 3vw, 2.25rem);
+      letter-spacing:.03em;
+      text-transform:uppercase;
+    }
+    .highlight{
+      color:var(--accent);
+      text-shadow:0 0 18px rgba(255,204,0,.7);
     }
 
-    header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at -10% 0, rgba(255, 255, 255, 0.12), transparent 55%);
-      mix-blend-mode: screen;
-      opacity: 0.6;
-      pointer-events: none;
+    .subtitle{margin:0; color:var(--text-muted); max-width:44rem; font-size:.95rem;}
+
+    .banner{
+      margin-top:.25rem;
+      padding:1rem 1rem;
+      border-radius:var(--radius-lg);
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        linear-gradient(135deg, rgba(0,242,255,.14), transparent 45%),
+        linear-gradient(45deg, rgba(255,204,0,.14), transparent 55%),
+        rgba(0,0,0,.35);
+      box-shadow:0 10px 30px rgba(0,0,0,.45);
+      display:flex;
+      flex-direction:column;
+      gap:.5rem;
+      align-items:center;
+      text-align:center;
+    }
+    .banner-title{
+      margin:0;
+      font-size:1rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--accent-soft);
+    }
+    .email{
+      font-weight:800;
+      color:#00f2ff;
+      word-break:break-word;
+      text-shadow:0 0 12px rgba(0,242,255,.9);
+      font-size:1.15rem;
+      letter-spacing:.4px;
+    }
+    a{color:inherit; text-decoration:none;}
+    a:hover{filter:brightness(1.15); text-decoration:underline;}
+
+    .hero{
+      margin-top:.75rem;
+      background:rgba(6,8,18,.92);
+      border:1px solid var(--border-subtle);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-soft);
+      padding:1.25rem;
+      display:grid;
+      grid-template-columns: 300px 1fr;
+      gap:1.25rem;
+      align-items:center;
+    }
+    @media (max-width:760px){
+      .hero{grid-template-columns:1fr; text-align:center;}
     }
 
-    .header-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+    .hero img{
+      width:100%;
+      max-width:300px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 0 18px rgba(255,204,0,.40);
+      display:block;
+      margin:0 auto;
     }
 
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-      font-size: 0.8rem;
+    .hero-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      padding:.3rem .8rem;
+      border-radius:var(--radius-pill);
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(7,9,18,.65);
+      font-size:.8rem;
+      color:var(--text-muted);
+      width:max-content;
+    }
+    @media (max-width:760px){
+      .hero-kicker{margin:0 auto;}
+    }
+    .dot{
+      width:8px; height:8px; border-radius:50%;
+      background:var(--accent);
+      box-shadow:0 0 10px rgba(255,204,0,.9);
     }
 
-    .badge {
-      padding: 0.35rem 0.9rem;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(7, 9, 18, 0.75);
-      backdrop-filter: blur(8px);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
+    .hero-title{
+      margin:.55rem 0 .2rem;
+      font-size:1.35rem;
+      font-weight:800;
+      color:var(--text-main);
+    }
+    .hero-meta{margin:0; color:var(--text-muted); font-size:.92rem;}
+    .price{
+      margin:.8rem 0 .2rem;
+      font-size:1.25rem;
+      font-weight:900;
+      color:var(--accent);
+      text-shadow:0 0 14px rgba(255,204,0,.55);
+    }
+    .obo{color:var(--accent-soft); font-weight:700;}
+    .hero-note{
+      margin:.35rem 0 0;
+      color:var(--text-muted);
+      font-size:.9rem;
     }
 
-    .badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 10px rgba(255, 204, 0, 0.9);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(1.8rem, 3vw, 2.3rem);
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-
-    h1 span.highlight {
-      color: var(--accent);
-      text-shadow: 0 0 18px rgba(255, 204, 0, 0.7);
-    }
-
-    .subtitle {
-      margin: 0;
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      max-width: 40rem;
-    }
-
-    .subtitle-photos {
-      margin-top: 0.3rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--accent-soft);
-    }
-
-    .contact-row {
-      margin-top: 0.5rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      align-items: center;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .pill-strong {
-      padding: 0.3rem 0.9rem;
-      border-radius: var(--radius-pill);
-      background: rgba(0, 0, 0, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-
-    .pill-strong strong {
-      color: var(--accent-soft);
-      font-weight: 600;
-    }
-
-    .email {
-      font-weight: 700;
-      color: #00f2ff;
-      word-break: break-all;
-      text-shadow: 0 0 12px rgba(0, 242, 255, 0.9);
-      font-size: 1.1rem;
-      letter-spacing: 0.4px;
-    }
-
-    .email:hover {
-      color: #ffffff;
-      text-shadow: 0 0 18px rgba(255, 255, 255, 0.95);
-    }
-
-    /* status bar */
-    .status-bar {
-      margin-top: 1.25rem;
-      border-radius: var(--radius-pill);
-      padding: 0.55rem 1rem;
-      background: rgba(11, 13, 25, 0.96);
-      border: 1px solid var(--border-subtle);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    .status-label {
-      font-weight: 600;
-      color: var(--accent-soft);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .status-divider {
-      width: 1px;
-      height: 1.1rem;
-      background: rgba(255, 255, 255, 0.12);
-    }
-
-    .status-date {
-      font-style: italic;
-      font-weight: 600;
-      color: var(--accent-2);
-    }
-
-    .status-warning {
-      font-weight: 500;
-      color: var(--accent-3);
-    }
-
-    /* main layout */
-    main {
-      margin-top: 1.75rem;
-      display: grid;
-      grid-template-columns: 2.1fr 1fr;
-      gap: 1.25rem;
-    }
-
-    @media (max-width: 900px) {
-      main {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    section {
-      background: rgba(6, 8, 18, 0.98);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 1.25rem 1.2rem 1.4rem;
-    }
-
-    section + section {
-      margin-top: 1rem;
-    }
-
-    .section-title-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .section-title {
-      font-size: 1rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #f2f4ff;
-    }
-
-    .section-chip {
-      padding: 0.2rem 0.7rem;
-      border-radius: var(--radius-pill);
-      font-size: 0.75rem;
-      background: var(--chip-bg);
-      border: 1px solid var(--chip-border);
-      color: var(--text-muted);
-    }
-
-    .hint {
-      margin: 0 0 0.85rem;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    /* card list */
-    .card-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .card-item {
-      padding: 0.7rem 0.8rem;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), transparent);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr) auto;
-      gap: 0.4rem 0.75rem;
-      align-items: center;
-      font-size: 0.88rem;
-    }
-
-    .card-title {
-      font-weight: 600;
-    }
-
-    .card-meta {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      justify-content: flex-end;
-    }
-
-    .tag {
-      padding: 0.18rem 0.55rem;
-      border-radius: var(--radius-pill);
-      font-size: 0.75rem;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(12, 16, 28, 0.95);
-      white-space: nowrap;
-    }
-
-    .tag-grade {
-      border-color: var(--accent-soft);
-      color: var(--accent-soft);
-    }
-
-    .tag-condition {
-      border-color: var(--accent-2);
-      color: var(--accent-2);
-    }
-
-    .tag-price {
-      border-color: var(--accent-3);
-      color: var(--accent-3);
-    }
-
-    .card-note {
-      grid-column: 1 / -1;
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      opacity: 0.9;
-    }
-
-    /* sidebar */
-    .sidebar-block {
-      margin-bottom: 1rem;
-    }
-
-    .sidebar-block:last-child {
-      margin-bottom: 0;
-    }
-
-    .sidebar-list {
-      list-style: none;
-      padding: 0;
-      margin: 0.3rem 0 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      font-size: 0.8rem;
-    }
-
-    .sidebar-pill {
-      padding: 0.25rem 0.7rem;
-      border-radius: var(--radius-pill);
-      background: var(--chip-bg);
-      border: 1px solid var(--chip-border);
-      color: var(--text-muted);
-    }
-
-    footer {
-      margin-top: 1.5rem;
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      text-align: center;
-    }
-
-    footer span {
-      opacity: 0.7;
-    }
-
-    /* utility */
-    a {
-      color: var(--accent-2);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
+    footer{
+      margin-top:1.25rem;
+      text-align:center;
+      color:var(--text-muted);
+      font-size:.75rem;
+      opacity:.85;
     }
   </style>
 </head>
@@ -393,1108 +186,45 @@
   <div class="page">
     <header>
       <div class="header-inner">
-        <div class="badge-row">
-          <div class="badge">
-            <span class="badge-dot"></span>
-            <span>Live binder · Personal collection</span>
-          </div>
-          <div class="badge">
-            <span>📍</span>
-            <span>Sales managed by <strong>Matt</strong></span>
-          </div>
-        </div>
-
-        <h1>
-          <span class="highlight">Pokémon</span> Sale Binder
-        </h1>
-
+        <h1><span class="highlight">gold</span> metal charizard for sale</h1>
         <p class="subtitle">
-          Selected raw cards & graded slabs from my personal collection.
-          Everything listed here is available unless marked otherwise.
-          Prices are based on realistic recent sales, not fantasy “list” prices.
-        </p>
-        <p class="subtitle-photos">
-          Photos and close-ups are available on request for <em>every</em> card. One hero card is shown below;
-          everything else stays off-camera unless you email.
+          This page is intentionally minimal. If you want my current available cards list, email me and I’ll reply with what’s in the binder and send pics/video.
         </p>
 
-        <div class="contact-row">
-          <div class="pill-strong">
-            <span>📧</span>
-            <span>
-              Email offers &amp; photo requests:<br />
-              <span class="email">matt.baier86@gmail.com</span>
-            </span>
+        <div class="banner">
+          <p class="banner-title">email me for available cards + photos</p>
+          <div class="email">
+            <a href="mailto:matt.baier86@gmail.com?subject=Pokemon%20Cards%20Available%20-%20Request%20List%20%2B%20Pics&body=Hey%20Matt%2C%0A%0ACan%20you%20send%20your%20current%20available%20cards%20list%20and%20pics%20for%3A%0A-%20%0A%0AThanks!">matt.baier86@gmail.com</a>
           </div>
-          <span>Bundles &amp; reasonable offers are welcome.</span>
+          <p class="subtitle" style="margin:0; max-width:52rem;">
+            Include what you’re looking for (Charizards, Rayquazas, slabs, etc.) and I’ll send the current list + close-ups.
+          </p>
         </div>
 
-        <!-- HERO IMAGE: UPC GOLD CHARIZARD -->
-        <div style="margin-top:1rem; display:flex; justify-content:center;">
-          <img
-            src="upc-gold-charizard.jpg"
-            alt="2021 Pokémon Celebrations Gold Metal Charizard SGC 9"
-            style="max-width:260px; border-radius:14px; border:1px solid rgba(255,255,255,0.12); box-shadow:0 0 18px rgba(255,204,0,0.4);"
-          />
-        </div>
+        <div class="hero">
+          <div>
+            <img
+              src="upc-gold-charizard.jpg"
+              alt="2021 Pokémon Celebrations Gold Metal Charizard SGC 9"
+            />
+          </div>
 
-        <div style="text-align:center; margin-top:0.75rem; font-size:1rem; font-weight:700; color:#ffcc00;">
-          🔥 SGC 9 GOLD METAL CHARIZARD — ASKING $1500 OBO · MORE PICS BY EMAIL 🔥
-        </div>
+          <div>
+            <div class="hero-kicker"><span class="dot"></span> hero card · celebrations upc</div>
+            <div class="hero-title">2021 Celebrations Ultra Premium Collection · Gold Metal Charizard</div>
+            <p class="hero-meta">Graded: <strong>SGC 9 (Mint)</strong> · Gold metal promo · Display piece</p>
 
-        <div class="status-bar">
-          <span class="status-label">pricing &amp; updates</span>
-          <span class="status-divider"></span>
-          <span>
-            Site is updated <strong>as time allows</strong>, not every tiny market move.
-            Nothing here is a locked or guaranteed price.
-          </span>
-          <span class="status-divider"></span>
-          <span>
-            Last manual review:
-            <span class="status-date"><strong><em>Dec 30, 2025</em></strong></span>
-          </span>
-          <span class="status-divider"></span>
-          <span class="status-warning">
-            All prices are flexible &amp; negotiable. If you like a card, <strong>email and ask</strong>.
-          </span>
+            <div class="price">asking: $1500 <span class="obo">obo</span></div>
+            <p class="hero-note">
+              More photos and video available by email before purchase. Shipping/meetup details handled in the email thread.
+            </p>
+          </div>
         </div>
       </div>
     </header>
 
-    <main>
-      <!-- MAIN INVENTORY COLUMN -->
-      <div>
-        <!-- Graded slabs -->
-        <section id="graded">
-          <div class="section-title-row">
-            <h2 class="section-title">Graded slabs</h2>
-            <span class="section-chip">PSA · SGC · CGC</span>
-          </div>
-          <p class="hint">
-            All graded cards are authentic and slabbed by PSA, SGC, or CGC. Ideal if you want display pieces without grading them yourself.
-            Photos and front/back close-ups are available by email before you commit.
-          </p>
-
-          <ul class="card-list">
-            <!-- GOLD METAL CHARIZARD -->
-            <li class="card-item">
-              <div>
-                <div class="card-title">Gold Metal Charizard (Celebrations UPC)</div>
-                <div class="card-meta">
-                  2021 Celebrations Ultra Premium Collection · Gold metal promo
-                </div>
-              </div>
-              <div class="card-note">
-                Big, shiny, and loud. Strong centering and clean surface in person. Hero card of the box.
-                More photos and video available on request before purchase.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">SGC 9 Mint</span>
-                <span class="tag tag-condition">Slabbed · Clean</span>
-                <span class="tag tag-price">$1500 OBO</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">M Charizard EX – Evolutions #13</div>
-                <div class="card-meta">
-                  Full art Crimson Dive from XY Evolutions
-                </div>
-              </div>
-              <div class="card-note">
-                Popular modern throwback Charizard. Solid eye appeal in slab. Ask for label and close-up pics if needed.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">PSA 8</span>
-                <span class="tag tag-condition">Slabbed</span>
-                <span class="tag tag-price">Ballpark: $105–$127.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Charizard – Illustration Grand Prix (JP)</div>
-                <div class="card-meta">
-                  2020 PROMO S-P #143 · Stadium artwork
-                </div>
-              </div>
-              <div class="card-note">
-                Japanese Illustration Grand Prix promo. PSA copy. Strong collectible piece.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">PSA 8</span>
-                <span class="tag tag-condition">Promo slab</span>
-                <span class="tag tag-price">Ballpark: $180–$225</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Charizard – Illustration Grand Prix (JP)</div>
-                <div class="card-meta">
-                  Same art, CGC slab
-                </div>
-              </div>
-              <div class="card-note">
-                Duplicate of the same promo in CGC 9. Nice pair with the PSA copy if you want both.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 9</span>
-                <span class="tag tag-condition">Promo slab</span>
-                <span class="tag tag-price">Ballpark: $90–$120</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">M Charizard EX (JP, Crimson Dive 300)</div>
-                <div class="card-meta">
-                  Gold full art Japanese Mega Charizard
-                </div>
-              </div>
-              <div class="card-note">
-                Japanese gold-style Mega Charizard. Strong display card. Ask for front/back photos.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 8.5</span>
-                <span class="tag tag-condition">Japanese slab</span>
-                <span class="tag tag-price">Ballpark: $82.50–$105</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">M Blastoise EX</div>
-                <div class="card-meta">
-                  Full art Mega from XY era
-                </div>
-              </div>
-              <div class="card-note">
-                Mega Blastoise full art in CGC 8.5. Clean modern vintage slab.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 8.5</span>
-                <span class="tag tag-condition">Slabbed</span>
-                <span class="tag tag-price">Ballpark: $52.50–$67.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">M Venusaur EX (gold crisis vine)</div>
-                <div class="card-meta">
-                  Full art Mega Venusaur
-                </div>
-              </div>
-              <div class="card-note">
-                Gold-style Mega Venusaur. Good match with Blastoise and Charizard Megas.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 8.5</span>
-                <span class="tag tag-condition">Slabbed</span>
-                <span class="tag tag-price">Ballpark: $52.50–$67.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Blastoise EX</div>
-                <div class="card-meta">
-                  XY-era EX
-                </div>
-              </div>
-              <div class="card-note">
-                Classic EX-era Blastoise. Ask for photos for edges/foil.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 8.5</span>
-                <span class="tag tag-condition">Slabbed</span>
-                <span class="tag tag-price">Ballpark: $30–$45</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Base Set Blastoise</div>
-                <div class="card-meta">
-                  Unlimited holo, PSA slab
-                </div>
-              </div>
-              <div class="card-note">
-                Base Set Blastoise in PSA 6. Honest grade, great nostalgia copy.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">PSA 6</span>
-                <span class="tag tag-condition">Vintage · Played</span>
-                <span class="tag tag-price">Ballpark: $33–$42</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Magneton – Neo Revelation</div>
-                <div class="card-meta">
-                  Vintage holo, PSA slab
-                </div>
-              </div>
-              <div class="card-note">
-                Neo Revelation Magneton in PSA 6. Solid binder/display piece for Neo collectors.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">PSA 6</span>
-                <span class="tag tag-condition">Vintage</span>
-                <span class="tag tag-price">Ballpark: $45–$60</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Lugia (reverse / EX-era)</div>
-                <div class="card-meta">
-                  Holo Lugia in CGC slab
-                </div>
-              </div>
-              <div class="card-note">
-                EX-era style Lugia. Clean CGC 9. Exact set details on request.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 9</span>
-                <span class="tag tag-condition">Reverse / Holo</span>
-                <span class="tag tag-price">Ballpark: $37.50–$45</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Galarian Zapdos</div>
-                <div class="card-meta">
-                  Modern alt-style bird
-                </div>
-              </div>
-              <div class="card-note">
-                Strong modern bird art. Nice mid-range slab.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 8.5</span>
-                <span class="tag tag-condition">Slabbed</span>
-                <span class="tag tag-price">Ballpark: $30–$42</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Squirtle – Base Set</div>
-                <div class="card-meta">
-                  Original Kanto starter
-                </div>
-              </div>
-              <div class="card-note">
-                Base Set Squirtle in the PSA 6–7 range. Starter nostalgia in a slab.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">PSA 6–7</span>
-                <span class="tag tag-condition">Vintage</span>
-                <span class="tag tag-price">Ballpark: $24–$30</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Wartortle – Base Set</div>
-                <div class="card-meta">
-                  Base Set stage 1
-                </div>
-              </div>
-              <div class="card-note">
-                Wartortle from Base Set in PSA 6. Pairs well with the Squirtle.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">PSA 6</span>
-                <span class="tag tag-condition">Vintage</span>
-                <span class="tag tag-price">Ballpark: $27–$33</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Squirtle – TV Animation (Topps-style)</div>
-                <div class="card-meta">
-                  TV promo-style Squirtle
-                </div>
-              </div>
-              <div class="card-note">
-                TV animation Squirtle slab in PSA 9. Different lane from standard TCG.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">PSA 9</span>
-                <span class="tag tag-condition">Promo slab</span>
-                <span class="tag tag-price">Ballpark: $33–$45</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Suicune (JP) – full art</div>
-                <div class="card-meta">
-                  High-grade legendary dog, Japanese full art
-                </div>
-              </div>
-              <div class="card-note">
-                Suicune full art in CGC 9.5. Very clean, strong grade.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 9.5</span>
-                <span class="tag tag-condition">Japanese slab</span>
-                <span class="tag tag-price">Ballpark: $52.50–$75</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Suicune – Aqua Recover</div>
-                <div class="card-meta">
-                  English reverse Suicune
-                </div>
-              </div>
-              <div class="card-note">
-                Aqua Recover Suicune in CGC 8.5. Good art, mid-range slab.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 8.5</span>
-                <span class="tag tag-condition">Reverse holo</span>
-                <span class="tag tag-price">Ballpark: $18–$27</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Crobat V (shiny)</div>
-                <div class="card-meta">
-                  Japanese shiny full art
-                </div>
-              </div>
-              <div class="card-note">
-                Shiny Crobat V in CGC 9. Strong purple shiny from modern era.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 9</span>
-                <span class="tag tag-condition">Shiny FA</span>
-                <span class="tag tag-price">Ballpark: $45–$60</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Arcanine (full art)</div>
-                <div class="card-meta">
-                  Modern EX/V-style full art
-                </div>
-              </div>
-              <div class="card-note">
-                Big doggo full art in CGC 8.5. Great color, good condition.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 8.5</span>
-                <span class="tag tag-condition">Slabbed</span>
-                <span class="tag tag-price">Ballpark: $22.50–$33</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Professor (full art trainer)</div>
-                <div class="card-meta">
-                  Modern full art supporter
-                </div>
-              </div>
-              <div class="card-note">
-                Full art professor supporter in CGC 9. Clean modern trainer slab.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 9</span>
-                <span class="tag tag-condition">Trainer FA</span>
-                <span class="tag tag-price">Ballpark: $15–$22.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Houndoom V</div>
-                <div class="card-meta">
-                  Modern V holo
-                </div>
-              </div>
-              <div class="card-note">
-                Houndoom V in CGC 8.5. Good mid-tier dog for Houndoom fans.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 8.5</span>
-                <span class="tag tag-condition">Slabbed</span>
-                <span class="tag tag-price">Ballpark: $15–$22.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Diancie (pink full art)</div>
-                <div class="card-meta">
-                  Fairy-type sparkle card
-                </div>
-              </div>
-              <div class="card-note">
-                Diancie full art in CGC 9. Very pink, very shiny, very fairy.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 9</span>
-                <span class="tag tag-condition">Full art</span>
-                <span class="tag tag-price">Ballpark: $27–$37.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Forretress (reverse)</div>
-                <div class="card-meta">
-                  2011-era reverse holo
-                </div>
-              </div>
-              <div class="card-note">
-                Forretress reverse in CGC 8. Fun oddball slab for the right collector.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 8</span>
-                <span class="tag tag-condition">Reverse holo</span>
-                <span class="tag tag-price">Ballpark: $9–$15</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">
-                  McDonald's Pikachu / Bulbasaur / Rowlet / Squirtle (2021 promos)
-                </div>
-                <div class="card-meta">
-                  Various CGC grades from 7–9
-                </div>
-              </div>
-              <div class="card-note">
-                2021 McDonald's promo set cards in CGC slabs. Multiple characters and grades. Ask which ones are still available.
-                Photos on request per card.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-grade">CGC 7–9</span>
-                <span class="tag tag-condition">Promo slabs</span>
-                <span class="tag tag-price">Ballpark: $12–$30 each</span>
-              </div>
-            </li>
-          </ul>
-
-          <p class="hint" style="margin-top:0.9rem;">
-            For multiple slab purchases or the entire graded lot, I’m open to bundled pricing. Email if you want a “take it all” number.
-          </p>
-        </section>
-
-        <!-- Raw singles -->
-        <section id="raw-cards">
-          <div class="section-title-row">
-            <h2 class="section-title">Raw cards</h2>
-            <span class="section-chip">Binder-kept · near-mint unless noted</span>
-          </div>
-          <p class="hint">
-            Raw cards are stored in sleeves and binders or toploaders in real life.
-            All raw prices assume near-mint unless noted. Photos and condition close-ups are available on request for everything here.
-          </p>
-
-          <ul class="card-list">
-            <li class="card-item">
-              <div>
-                <div class="card-title">Umbreon VMAX (alt art)</div>
-                <div class="card-meta">
-                  Trainer Gallery / alt artwork
-                </div>
-              </div>
-              <div class="card-note">
-                High-demand Umbreon VMAX alt. Raw near-mint, sleeved. Ask for front/back pics if you’re picky.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw · Near Mint</span>
-                <span class="tag tag-price">Ballpark: $60–$97.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Rayquaza VMAX (alt art)</div>
-                <div class="card-meta">
-                  Rapid Strike alt from Evolving Skies
-                </div>
-              </div>
-              <div class="card-note">
-                Big Ray alt from Evolving Skies. Strong binder or grading candidate.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw · Near Mint</span>
-                <span class="tag tag-price">Ballpark: $45–$82.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Blaziken VMAX (alt art)</div>
-                <div class="card-meta">
-                  Chilling Reign alternate art
-                </div>
-              </div>
-              <div class="card-note">
-                Blaziken alt art with a lot going on in the background. Clean copy.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw · Near Mint</span>
-                <span class="tag tag-price">Ballpark: $30–$52.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Sylveon VMAX (alt art)</div>
-                <div class="card-meta">
-                  Eeveelution from Evolving Skies
-                </div>
-              </div>
-              <div class="card-note">
-                Fan-favorite Sylveon VMAX alt. Great for eeveelution collectors.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw · Near Mint</span>
-                <span class="tag tag-price">Ballpark: $27–$45</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Ice Rider Calyrex VMAX (alt art)</div>
-                <div class="card-meta">
-                  Chilling Reign alt
-                </div>
-              </div>
-              <div class="card-note">
-                Ice Rider alt art. Good mid-range hit, clean copy.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw · Near Mint</span>
-                <span class="tag tag-price">Ballpark: $15–$27</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Rayquaza EX – Dragon Strike</div>
-                <div class="card-meta">
-                  XY Roaring Skies
-                </div>
-              </div>
-              <div class="card-note">
-                Dragon Strike Rayquaza EX. Great for Rayquaza fans building a binder page.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $15–$27</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Rayquaza EX – Celestial Roar</div>
-                <div class="card-meta">
-                  XY Roaring Skies
-                </div>
-              </div>
-              <div class="card-note">
-                Another Rayquaza EX art from the same era. Good pair with Dragon Strike.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $15–$30</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Rayquaza EX – additional variant</div>
-                <div class="card-meta">
-                  Additional Rayquaza EX art
-                </div>
-              </div>
-              <div class="card-note">
-                Third Rayquaza EX variant. Ask for pics to see which art it is if you’re chasing a specific one.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $12–$22.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">M Gardevoir EX (dual-type)</div>
-                <div class="card-meta">
-                  Steam Siege, Brilliant Arrow
-                </div>
-              </div>
-              <div class="card-note">
-                Dual-type Mega Gardevoir EX. Fun fairy/steel combo.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $9–$18</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">M Gardevoir EX – alt art</div>
-                <div class="card-meta">
-                  Colorful EX full art
-                </div>
-              </div>
-              <div class="card-note">
-                Alternate full art Mega Gardevoir EX. Busy neon art style.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $12–$22.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">M Gardevoir EX – third variant</div>
-                <div class="card-meta">
-                  Neon-style full art
-                </div>
-              </div>
-              <div class="card-note">
-                Third Mega Gardevoir EX art in the binder. Ask if you want a trio deal.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $10.50–$21</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Yveltal EX</div>
-                <div class="card-meta">
-                  XY-era legendary bird
-                </div>
-              </div>
-              <div class="card-note">
-                Yveltal EX, dark bird from XY era. Nice mid-tier EX.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $12–$21</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">M Mewtwo EX</div>
-                <div class="card-meta">
-                  Vanishing Strike / XY
-                </div>
-              </div>
-              <div class="card-note">
-                Mega Mewtwo EX with Vanishing Strike. Classic modern Mewtwo art.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $7.50–$18</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Venusaur EX ×4</div>
-                <div class="card-meta">
-                  XY / Evolutions full art copies
-                </div>
-              </div>
-              <div class="card-note">
-                Four copies of Venusaur EX, nice little squad. Discounts possible if you take multiples.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $7.50–$15 each</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">M Venusaur EX (raw)</div>
-                <div class="card-meta">
-                  Additional Mega Venusaur EX
-                </div>
-              </div>
-              <div class="card-note">
-                Raw Mega Venusaur EX to go with the slab and other Venusaur cards.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $12–$21</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Venusaur &amp; Snivy GX (JP)</div>
-                <div class="card-meta">
-                  Tag Team Japanese
-                </div>
-              </div>
-              <div class="card-note">
-                Japanese Tag Team Venusaur & Snivy GX. Good art, good tag team.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw · Japanese</span>
-                <span class="tag tag-price">Ballpark: $7.50–$15</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Blastoise &amp; Piplup GX ×2</div>
-                <div class="card-meta">
-                  Tag Team GX, both copies near-mint
-                </div>
-              </div>
-              <div class="card-note">
-                Two Blastoise & Piplup Tag Team GX. Good little duo lot.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $9–$15 each</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Reshiram &amp; Charizard GX</div>
-                <div class="card-meta">
-                  Tag Team GX, Outrage / Flare Strike
-                </div>
-              </div>
-              <div class="card-note">
-                Strong Tag Team with Charizard & Reshiram. Good Charizard binder card.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $12–$21</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Dragonite EX (gold)</div>
-                <div class="card-meta">
-                  Gold-style full art Dragonite EX
-                </div>
-              </div>
-              <div class="card-note">
-                Shiny gold Dragonite EX. Big friendly dragon energy.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $12–$22.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Reshiram full art</div>
-                <div class="card-meta">
-                  Silver-style full art Reshiram
-                </div>
-              </div>
-              <div class="card-note">
-                Full art Reshiram with silver, clean look. Nice pair with Zekrom if you add one later.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $7.50–$15</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Tyranitar V / VMAX</div>
-                <div class="card-meta">
-                  Modern Tyranitar hit
-                </div>
-              </div>
-              <div class="card-note">
-                Modern Tyranitar V/VMAX style card. Solid dark-type for a binder page.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $9–$15</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Gyarados EX</div>
-                <div class="card-meta">
-                  EX with Stormy Seas
-                </div>
-              </div>
-              <div class="card-note">
-                Gyarados EX with Stormy Seas. Great art, iconic ability name.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $12–$18</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Xerneas GX</div>
-                <div class="card-meta">
-                  Modern fairy-type GX
-                </div>
-              </div>
-              <div class="card-note">
-                Xerneas GX, fairy-type legend. Good color, nice holo.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $6–$10.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Blastoise VMAX</div>
-                <div class="card-meta">
-                  Gigantamax Blastoise
-                </div>
-              </div>
-              <div class="card-note">
-                Big cannon turtle in VMAX form. Great for Blastoise pages.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $6–$10.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Houndoom (gold secret)</div>
-                <div class="card-meta">
-                  Single Strike gold secret rare
-                </div>
-              </div>
-              <div class="card-note">
-                Gold secret Houndoom. Strong modern gold rarity dog.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $22.50–$37.50</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Eevee – Energy Evolution</div>
-                <div class="card-meta">
-                  Sun &amp; Moon promo-style
-                </div>
-              </div>
-              <div class="card-note">
-                Popular Eevee with Energy Evolution text. Good for evolution collectors.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $4.50–$9</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Venusaur (Pokémon GO) ×2</div>
-                <div class="card-meta">
-                  Loopy Lasso / Solar Beam
-                </div>
-              </div>
-              <div class="card-note">
-                Two Pokémon GO Venusaur cards. Good little pair if you like the GO set.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $2.25–$4.50 each</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Bulbasaur (various)</div>
-                <div class="card-meta">
-                  Base reprints &amp; modern versions
-                </div>
-              </div>
-              <div class="card-note">
-                A handful of Bulbasaur prints, older-style and modern. Ask if you want specific set logos.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $1.12–$3</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Ivysaur (various)</div>
-                <div class="card-meta">
-                  Base reprints
-                </div>
-              </div>
-              <div class="card-note">
-                Ivysaur cards to help complete the Bulba line.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $2.25–$3</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Marnie (full art trainer)</div>
-                <div class="card-meta">
-                  Sword &amp; Shield era full art
-                </div>
-              </div>
-              <div class="card-note">
-                Popular trainer Marnie full art. Great binder flex.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw</span>
-                <span class="tag tag-price">Ballpark: $22.50–$30</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Arcanine (modern ultra)</div>
-                <div class="card-meta">
-                  Raw, near-mint
-                </div>
-              </div>
-              <div class="card-note">
-                Modern Arcanine ultra rare. Strong art for dog fans.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw · Near Mint</span>
-                <span class="tag tag-price">Ballpark: $3–$6</span>
-              </div>
-            </li>
-
-            <li class="card-item">
-              <div>
-                <div class="card-title">Diancie (holo)</div>
-                <div class="card-meta">
-                  Raw, near-mint
-                </div>
-              </div>
-              <div class="card-note">
-                Holo Diancie in nice shape. Good sparkle for fairy pages.
-              </div>
-              <div class="card-tags">
-                <span class="tag tag-condition">Raw · Near Mint</span>
-                <span class="tag tag-price">Ballpark: $3–$6</span>
-              </div>
-            </li>
-          </ul>
-
-          <p class="hint" style="margin-top:0.9rem;">
-            Open to selling individual cards, small bundles (all Charizards, all Rayquazas, etc.),
-            or the entire raw lot as one purchase. Email if you want a “load the whole binder in a box” price.
-          </p>
-        </section>
-      </div>
-
-      <!-- SIDEBAR COLUMN -->
-      <aside>
-        <section class="sidebar-block">
-          <div class="section-title-row">
-            <h2 class="section-title">How to buy</h2>
-          </div>
-          <p class="hint">
-            Simple process, no nonsense:
-          </p>
-          <ul class="sidebar-list">
-            <li class="sidebar-pill">1. Email the card(s) you want</li>
-            <li class="sidebar-pill">2. Ask for pics / video (front &amp; back)</li>
-            <li class="sidebar-pill">3. Agree on price &amp; shipping</li>
-            <li class="sidebar-pill">4. Pay · card ships out</li>
-          </ul>
-        </section>
-
-        <section class="sidebar-block">
-          <div class="section-title-row">
-            <h2 class="section-title">Notes</h2>
-          </div>
-          <p class="hint">
-            A few quick ground rules so everyone stays happy:
-          </p>
-          <ul class="sidebar-list">
-            <li class="sidebar-pill">Prices are <strong>ballpark, not locked</strong></li>
-            <li class="sidebar-pill">Market moves · email confirms</li>
-            <li class="sidebar-pill">Photos always on request</li>
-            <li class="sidebar-pill">Bundles get better deals</li>
-          </ul>
-        </section>
-
-        <section class="sidebar-block">
-          <div class="section-title-row">
-            <h2 class="section-title">Condition language</h2>
-          </div>
-          <p class="hint">
-            Rough translation of how condition is used here:
-          </p>
-          <ul class="sidebar-list">
-            <li class="sidebar-pill">Near Mint · very clean</li>
-            <li class="sidebar-pill">Light Play · light edge / surface wear</li>
-            <li class="sidebar-pill">Moderate Play · visible wear, still nice binder card</li>
-          </ul>
-        </section>
-
-        <section class="sidebar-block">
-          <div class="section-title-row">
-            <h2 class="section-title">Big picture</h2>
-          </div>
-          <p class="hint">
-            Rough total box goal and expectations:
-          </p>
-          <ul class="sidebar-list">
-            <li class="sidebar-pill">Target box price: ~ $1275 for everything</li>
-            <li class="sidebar-pill">Est. value range: ~ $1170–$1425 total</li>
-            <li class="sidebar-pill">Serious offers only</li>
-          </ul>
-        </section>
-      </aside>
-    </main>
-
     <footer>
-      <span>
-        This page won’t always be perfectly up to the minute. If you’re interested in something,
-        just email and ask what’s current &amp; what it looks like in real life.
-      </span>
+      For the full binder list, bundles, or “take it all” offers: email is the source of truth.
     </footer>
   </div>
 </body>
